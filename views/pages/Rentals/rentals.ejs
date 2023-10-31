@@ -1,0 +1,14 @@
+<div class="container">
+  <ul class="rentals">
+    <% groupedRentals.forEach((group) => { %>
+      <div class="text-center">
+        <h3><%= group.cityProvince %></h3>
+        <ul class="rentals">
+          <% group.rentals.forEach((rental) => { %>
+            <li><%- include('../../partials/rental', {rental: rental}) -%></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% }); %>
+  </ul>
+</div>

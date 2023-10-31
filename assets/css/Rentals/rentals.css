@@ -1,0 +1,69 @@
+.container {
+  padding: 100px 60px 150px 60px !important;
+
+  @media (max-width: 620px) {
+    padding: 80px 60px 100px 60px !important;
+  }
+}
+
+.header-container {
+  background-color: #41507b;
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff !important;
+}
+
+.nav-link:hover {
+  color: #f9f9f9 !important;
+}
+
+select {
+  max-width: 250px;
+}
+
+.input-group {
+  max-width: 250px;
+}
+
+button {
+  background: #41507b !important;
+}
+
+.rentals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card {
+  max-width: 250px !important;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+  transition: 0.3s !important;
+  border-radius: 10px !important;
+}
+
+.card img {
+  max-width: 250px;
+  max-height: 250px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.card-content {
+  padding: 10px;
+  text-align: left;
+}
+
+.card-content h4 {
+  margin: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rental-detail {
+  font-size: 13px;
+}

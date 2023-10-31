@@ -1,0 +1,43 @@
+<section class="hero-container">
+  <img src="images/resort.jpg" alt="Hero Image">
+  <div class="hero-content">
+    <p class="hero-text">List your property on <strong>Homely Havens</strong> and open your door to rental income</p>
+    <button class="hero-button">
+      List your property
+    </button>
+  </div>
+</section>
+<section class="service-container">
+  <ul class="services">
+    <li>
+      <img src="images/icons/time.png" class="service-icon" alt="Quality Time"/>
+      <h5 class="service-heading">Quality Time</h5>
+      <p class="service-subheading">Create lasting memories in a space that feels like your own.</p>
+    </li>
+    <li>
+      <img src="images/icons/peace.png" class="service-icon" alt="Feal at Ease"/>
+      <h5 class="service-heading">Feel at Ease</h5>
+      <p class="service-subheading">Rest easy knowing that you're in a safe and trusted environment.</p>
+    </li>
+    <li>
+      <img src="images/icons/privacy.png" class="service-icon" alt="Privacy"/>
+      <h5 class="service-heading">Your Private Space</h5>
+      <p class="service-subheading">Revel in the privacy of your personal rental space.</p>
+    </li>
+    <li>
+      <img src="images/icons/space.png" class="service-icon" alt="More for Less"/>
+      <h5 class="service-heading">Get More for Less</h5>
+      <p class="service-subheading">Enjoy affordable spaciousness and comfort.</p>
+    </li>
+  </ul>
+</section>
+<section class="featured-rentals-container">
+  <h2>Featured Rentals</h2>
+  <ul class="featured-rentals">
+    <% featured.forEach(function(rental){ %>
+      <li>
+        <%- include('../../partials/rental', {rental: rental}) -%>
+      </li>
+    <% }); %>
+  </ul>
+</section>
