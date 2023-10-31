@@ -5,9 +5,12 @@ No part of this assignment has been copied manually or electronically from any o
 (including web sites) or distributed to other students.
 
 Student Name : Melchi Lloyd Aballe
+
 Student Email : maballe@myseneca.ca
+
 Course/Section: WEB322/NEE
 
 ## Project URLs
 GitHub Repo : https://github.com/melchiaballe/web322-maballe
+
 Cyclic URL : https://<app_name>.cyclic.app/
