@@ -8,6 +8,8 @@ router.use(express.static('assets'));
 const db = require("../models/rentals-db");
 const { error } = require('console');
 
+const sgMail = require('@sendgrid/mail')
+const dotenv = require('dotenv').config()
 
 // Home Page
 router.get('/', (req, res) => {
@@ -63,8 +65,6 @@ router.post("/sign-up", (req, res) => {
   const { fname, lname, email, password } = req.body;
   const errors = {};
 
-  console.log(password);
-
   if (!fname) {
     errors.fname = "Firstname is required.";
   }
@@ -104,8 +104,7 @@ router.post("/sign-up", (req, res) => {
     });
   } else {
     // send email
-    const sgMail = require('@sendgrid/mail')
-    sgMail.setApiKey('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')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {
       to: email, // Change to your recipient
       from: 'dev.melchiaballe@gmail.com', // Change to your verified sender
