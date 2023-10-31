@@ -1,0 +1,9 @@
+.container {
+  padding: 100px 60px 150px 60px !important;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -5,7 +5,7 @@
         <div class="image-container">
           <img src="images/sign-up.jpg" />
         </div>
-        <form>
+        <form action="/sign-up" method="post" enctype="application/x-www-form-urlencoded">
           <div class="d-flex flex-column justify-content-center text-center">
             <h5>Sign Up</h5>
             <p>Already a member? <a href="/log-in">Log in</a></p>
@@ -13,24 +13,51 @@
           <div class="name-fields-container">
             <div class="form-group">
               <label class="form-label" for="fname">First Name</label>
-              <input type="text" class="form-control" id="fname" placeholder="Enter firstname">
+              <div class="error"><%= errors.fname %></div>
+              <input
+                type="text"
+                class="form-control"
+                name="fname"
+                placeholder="Enter firstname"
+                value="<%= formData.fname %>"
+              >
             </div>
             <div class="form-group">
               <label class="form-label" for="lname">Last Name</label>
-              <input type="text" class="form-control" id="lname" placeholder="Enter lastname">
+              <div class="error"><%= errors.lname %></div>
+              <input
+                type="text"
+                class="form-control"
+                name="lname"
+                placeholder="Enter lastname"
+                value="<%= formData.lname %>"
+              >
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label" for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email address">
+            <div class="error"><%= errors.email %></div>
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              placeholder="Enter email address"
+              value="<%= formData.email %>"
+            >
           </div>
           <div class="mb-3">
             <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="current-password">
+            <div class="error"><%= errors.password %></div>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Password"
+              autocomplete="current-password"
+              value="<%= formData.password %>"
+            >
           </div>
-          <button class="btn w-full">
-            Sign up
-          </button>
+          <input class="btn btn-primary w-full" type="submit" value="Sign up">
         </form>
       </div>
     </div>

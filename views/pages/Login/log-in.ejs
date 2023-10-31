@@ -5,22 +5,22 @@
         <div class="image-container">
           <img src="images/login.jpg" />
         </div>
-        <form>
+        <form action="/log-in" method="post" novalidate>
           <div class="d-flex flex-column justify-content-center text-center">
             <h5>Log in</h5>
             <p>Doesn't have an account yet? <a href="/sign-up">Sign up</a></p>
           </div>
           <div class="mb-3">
             <label class="form-label" for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Your email address">
+            <div class="error"><%= errors.email %></div>
+            <input type="email" class="form-control" name="email" placeholder="Your email address">
           </div>
           <div class="mb-3">
             <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="current-password">
+            <div class="error"><%= errors.password %></div>
+            <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="current-password">
           </div>
-          <button class="btn w-full">
-            Log in
-          </button>
+          <input class="btn btn-primary w-full" type="submit" value="Login">
         </form>
       </div>
     </div>

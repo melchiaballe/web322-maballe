@@ -66,3 +66,8 @@ button {
   background: #457bdf !important;
   color: #fff !important;
 }
+
+.error {
+  color: #e92935;
+  font-size: 14px;
+}

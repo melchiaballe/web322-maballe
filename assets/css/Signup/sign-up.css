@@ -17,7 +17,7 @@
 
 .form-container {
   width: 830px;
-  height: 400px;
+  height: 470px;
   padding: 0 0.8rem !important;
 
   @media (max-width: 620px) {
@@ -76,4 +76,9 @@ a {
 button {
   background: #457bdf !important;
   color: #fff !important;
+}
+
+.error {
+  color: #e92935;
+  font-size: 14px;
 }
