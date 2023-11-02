@@ -13,4 +13,4 @@ Course/Section: WEB322/NEE
 ## Project URLs
 GitHub Repo : https://github.com/melchiaballe/web322-maballe
 
-Cyclic URL : https://<app_name>.cyclic.app/
+Cyclic URL : https://cobalt-blue-squirrel-vest.cyclic.app/
