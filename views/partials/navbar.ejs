@@ -7,8 +7,13 @@
     <ul class="d-flex mb-0">
       <li><a class="nav-link" href="/">Home</a></li>
       <li><a class="nav-link" href="/rentals">Rentals</a></li>
-      <li><a class="nav-link" href="/log-in">Log in</a></li>
-      <li><a class="nav-link" href="/sign-up">Sign up</a></li>
+      <% if (typeof user === "undefined") { %>
+        <li><a class="nav-link" href="/log-in">Log in</a></li>
+        <li><a class="nav-link" href="/sign-up">Sign up</a></li>
+      <% } else { %>
+        <li><a class="nav-link" href="<%= ctype === 'data-clerk' ? '/rentals/list' : '/cart' %>"> <%= user.firstName %></a></li>
+        <li><a class="nav-link" href="/logout">Logout</a></li>
+      <% } %>
     </ul>
   </nav>
 </header>

@@ -15,9 +15,13 @@
   color: #f9f9f9 !important;
 }
 
+.ml-1p7-rem {
+  margin-left: 1.7rem;
+}
+
 .form-container {
   width: 830px;
-  height: 400px;
+  height: 450px;
   padding: 0 0.8rem !important;
 
   @media (max-width: 620px) {

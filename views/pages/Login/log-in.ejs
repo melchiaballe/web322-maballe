@@ -10,6 +10,8 @@
             <h5>Log in</h5>
             <p>Doesn't have an account yet? <a href="/sign-up">Sign up</a></p>
           </div>
+          <!-- fix here error message  -->
+          <div class="mb-3 error text-center"><%= errors.main %> </div>
           <div class="mb-3">
             <label class="form-label" for="email">Email address</label>
             <div class="error"><%= errors.email %></div>
@@ -19,6 +21,18 @@
             <label class="form-label" for="password">Password</label>
             <div class="error"><%= errors.password %></div>
             <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="current-password">
+          </div>
+          <div class="mb-3">
+            <div>
+              <label class="form-label" for="type">Type</label>
+            </div>
+            
+            <label class="radio-inline"> <input type="radio" name="ctype" id="data-clerk" value="data-clerk" checked>
+              Data Entry Clerk
+            </label>
+            <label class="radio-inline ml-1p7-rem"> <input type="radio" name="ctype" id="customer" value="customer"> 
+              Customer 
+            </label>
           </div>
           <input class="btn btn-primary w-full" type="submit" value="Login">
         </form>
