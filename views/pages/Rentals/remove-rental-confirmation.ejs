@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="welcome-container">
+        <div class="d-flex flex-row">
+            <div class="col-md-12 mb-3 text-center">
+                <img 
+                    class="header-icon logo mb-5" 
+                    src="/images/logo.png" 
+                    alt="Homely Havens"
+                >
+                <h3 class="header-title mb-2">Confirmation</h3>
+                <h5 class="header-sub-text mb-5">Are you sure you want to remove rental?</h5>
+                <form
+                action="/rentals/remove/<%= id %>"
+                method="post">
+                    <button class="btn btn-primary me-3" type="submit">Confirm</button>
+                    <a class="btn" href="/rentals/list">Cancel</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

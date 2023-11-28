@@ -1,3 +1,5 @@
+const rentalModel = require("../models/rentalsModel");
+
 let rentals = [
   {
     headline: "Modern Minimalist Home",
@@ -7,7 +9,7 @@ let rentals = [
     pricePerNight: 480,
     city: "Ottawa",
     province: "Ontario",
-    imageUrl: "images/house1.jpg",
+    imageUrl: "house1.jpg",
     featuredRental: true
   },
   {
@@ -18,7 +20,7 @@ let rentals = [
     pricePerNight: 600,
     city: "Ottawa",
     province: "Ontario",
-    imageUrl: "images/house2.jpg",
+    imageUrl: "house2.jpg",
     featuredRental: true
   },
   {
@@ -29,7 +31,7 @@ let rentals = [
     pricePerNight: 340,
     city: "Ottawa",
     province: "Ontario",
-    imageUrl: "images/house3.jpg",
+    imageUrl: "house3.jpg",
     featuredRental: false
   },
   {
@@ -40,7 +42,7 @@ let rentals = [
     pricePerNight: 400,
     city: "Ottawa",
     province: "Ontario",
-    imageUrl: "images/house4.jpg",
+    imageUrl: "house4.jpg",
     featuredRental: false
   },
   {
@@ -51,7 +53,7 @@ let rentals = [
     pricePerNight: 170,
     city: "Toronto",
     province: "Ontario",
-    imageUrl: "images/house5.jpg",
+    imageUrl: "house5.jpg",
     featuredRental: true
   },
   {
@@ -62,7 +64,7 @@ let rentals = [
     pricePerNight: 300,
     city: "Toronto",
     province: "Ontario",
-    imageUrl: "images/house6.jpg",
+    imageUrl: "house6.jpg",
     featuredRental: true
   }
 ]
@@ -84,10 +86,16 @@ function getRentalsByCityAndProvince() {
     }
     groupedRentals.find(({cityProvince}) => cityProvince == key).rentals.push(rental);
   });
-  return groupedRentals
+  return groupedRentals;
+}
+
+
+function getAllRentals() {
+  return rentals;
 }
 
 module.exports = {
   getFeaturedRentals,
-  getRentalsByCityAndProvince
+  getRentalsByCityAndProvince,
+  getAllRentals
 }

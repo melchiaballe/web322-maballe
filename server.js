@@ -18,11 +18,14 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config({path: "./config/.env"})
 const mongoose = require("mongoose");
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', 'layouts/main');
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.use(session({
   secret: process.env.APP_SECRET,
@@ -49,6 +52,9 @@ app.use('/', generalRoutes);
 
 const rentalsRoutes = require('./controllers/rentalsController.js');
 app.use('/rentals', rentalsRoutes);
+
+const loadDataRoutes = require('./controllers/loadDataController.js');
+app.use('/load-data', loadDataRoutes);
 
 
 // *** DO NOT MODIFY THE LINES BELOW ***

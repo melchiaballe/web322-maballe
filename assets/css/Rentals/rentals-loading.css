@@ -1,0 +1,26 @@
+.container {
+    padding: 100px 60px 150px 60px !important;
+  }
+  
+  .welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-title {
+    color: #41507b;
+    text-align: center;
+  }
+  
+  .header-sub-text {
+    text-align: center;
+  }
+  
+  .header-icon {
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

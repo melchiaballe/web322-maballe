@@ -1,9 +1,32 @@
 <div class="container">
-    <div class="welcome-container">
-        <div>
-        <img class="header-icon" src="images/logo.png" class="logo" alt="Homely Havens">
-        <h1 class="header-title">WELCOME TO HOMELY HAVENS</h1>
-        <h3 class="header-sub-text">Rentals list is still on the work</h3>
-        </div>
+  <div class="col-md-12">
+    <div class="add-rental-container">
+      <a class="btn add-rental-btn" href="/rentals/add">
+        <i class='bx bx-plus align-middle'></i> Add Rental
+      </a>
     </div>
+    <div class="rentals mb-3">
+      <h3 class="text-center mb-3">Rentals</h3>
+    </div>
+    <ul class="rentals">
+      <% rentals.forEach((rental, index) => { %>
+        <div class="text-center">
+          <ul class="rentals">
+            <li>
+              <div class="d-flex justify-content-end">
+                <a class="btn" href="/rentals/edit/<%= rental._id %>">
+                  <i class='bx bx-pencil'></i>
+                </a>
+                <a class="btn" href="/rentals/remove/<%= rental._id %>">
+                  <i class='bx bx-trash'></i>
+                </a>
+              </div>
+              <%- include('../../partials/rental', {rental: rental}) -%>
+            </li>
+          </ul>
+        </div>
+      <% }); %>
+    </ul>
+    <a class="link"></a>
+  </div>
 </div>

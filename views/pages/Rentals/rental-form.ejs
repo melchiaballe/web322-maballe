@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="d-flex justify-content-center gap-5">
+    <div class="form-container">
+      <div class="card d-flex flex-row">
+        <div class="card-body">
+          <h5 class="text-center mb-3"><%= id ? 'Edit Rental' : 'Add Rental' %></h5>
+          <% if(id) { %>
+            <form
+            action="/rentals/edit/<%= id %>"
+            method="post"
+            enctype="multipart/form-data"
+            >
+          <% } else {%>
+            <form
+            action="/rentals/add"
+            method="post"
+            enctype="multipart/form-data"
+            >
+          <% } %>
+
+            <div class="col-md-12 mb-3">
+              <label class="form-label" for="headline">Headline*</label>
+              <input
+                type="text" 
+                class="form-control" 
+                name="headline" 
+                placeholder="Headline"
+                value="<%= formData.headline %>"
+              >
+              <div class="error"><%= errors.headline %></div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label" for="city">City*</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  name="city" 
+                  placeholder="City"
+                  value="<%= formData.city %>"
+                >
+                <div class="error"><%= errors.city %></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="province">Province*</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  name="province" 
+                  placeholder="Province"
+                  value="<%= formData.province %>"
+                >
+                <div class="error"><%= errors.province %></div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label class="form-label" for="numSleeps">Sleeps*</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  name="numSleeps" 
+                  placeholder="Sleeps"
+                  min="0"
+                  max="100"
+                  step="0"
+                  value="<%= formData.numSleeps %>"
+                >
+                <div class="error"><%= errors.numSleeps %></div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="numBedrooms">Num. of Bedrooms*</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  name="numBedrooms" 
+                  placeholder="Bedrooms"
+                  min="0"
+                  max="100"
+                  step="0"
+                  value="<%= formData.numBedrooms %>"
+                >
+                <div class="error"><%= errors.numBedrooms %></div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="numBathrooms">Num. of Bathrooms*</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  name="numBathrooms" 
+                  placeholder="Bathrooms"
+                  min="0"
+                  max="100"
+                  step="0"
+                  value="<%= formData.numBathrooms %>"
+                >
+                <div class="error"><%= errors.numBathrooms %></div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+              <label class="form-label" for="pricePerNight">Price per Night*</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                name="pricePerNight" 
+                min="0.01"
+                step="0.01"
+                placeholder="C$"
+                value="<%= formData.pricePerNight %>"
+              >
+              <div class="error"><%= errors.pricePerNight %></div>
+            </div>
+            <div class="col-auto mb-3">
+              <label class="form-label" for="imageUrl">Image*</label>
+              <% if (formData.imageUrl !== '') { %>
+                <h6>current file: <%= formData.imageUrl %></h6>
+              <% } %>
+              <input 
+                type="file" 
+                class="form-control" 
+                name="imageUrl"
+                accept="image/jpeg, image/jpg, image/png, image/gif"
+              >
+              <div class="error"><%= errors.imageUrl %></div>
+            </div>
+            <div class="col-auto mb-3">
+              <div class="form-check">
+                <input 
+                  class="form-check-input" 
+                  type="checkbox" 
+                  name="featuredRental"
+                  <%= formData.featuredRental === true ? "checked" : "" %>
+                >
+                <label class="form-check-label" for="featuredRental">
+                  Featured Rental
+                </label>
+              </div>
+              <div class="error"><%= errors.featuredRental %></div>
+            </div>
+            <button class="btn btn-primary me-3" type="submit">Submit</button>
+            <a class="btn" href="/rentals/list">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

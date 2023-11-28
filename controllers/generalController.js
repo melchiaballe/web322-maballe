@@ -8,13 +8,20 @@ const sgMail = require('@sendgrid/mail');
 const bcryptjs = require('bcryptjs');
 const userModel = require('../models/userModel');
 
+const rentalModel = require("../models/rentalsModel");
+
 
 // Home Page
 router.get('', (req, res) => {
-    res.render("pages/Home/home", {
-      additionalCSS: "css/Home/home.css",
-      featured: db.getFeaturedRentals()
-    });
+    rentalModel.find({featuredRental: true}).then(data => {
+        res.render("pages/Home/home", {
+            additionalCSS: "css/Home/home.css",
+            featured: data
+        });
+    }).catch( err => {
+        console.log(err);
+    })
+
 });
 
 

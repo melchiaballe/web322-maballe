@@ -25,7 +25,6 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="lname">Last Name</label>
-              <div class="error"><%= errors.lname %></div>
               <input
                 type="text"
                 class="form-control"
@@ -33,11 +32,11 @@
                 placeholder="Enter lastname"
                 value="<%= formData.lname %>"
               >
+              <div class="error"><%= errors.lname %></div>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label" for="email">Email address</label>
-            <div class="error"><%= errors.email %></div>
             <input
               type="text"
               class="form-control"
@@ -45,10 +44,10 @@
               placeholder="Enter email address"
               value="<%= formData.email %>"
             >
+            <div class="error"><%= errors.email %></div>
           </div>
           <div class="mb-3">
             <label class="form-label" for="password">Password</label>
-            <div class="error"><%= errors.password %></div>
             <input
               type="password"
               class="form-control"
@@ -57,6 +56,7 @@
               autocomplete="current-password"
               value="<%= formData.password %>"
             >
+            <div class="error"><%= errors.password %></div>
           </div>
           <input class="btn btn-primary w-full" type="submit" value="Sign up">
         </form>
