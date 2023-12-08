@@ -31,7 +31,7 @@ store.on('error', function(error) {
 });
 
 app.use(require('express-session')({
-  secret: process.env.secret,
+  secret: process.env.APP_SECRET,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7
   },
