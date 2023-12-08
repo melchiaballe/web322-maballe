@@ -118,3 +118,8 @@
 .rental-detail {
   font-size: 13px;
 }
+
+button, .rent-btn {
+  background: #41507b !important;
+  color: #fff !important;
+}

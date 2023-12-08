@@ -89,7 +89,6 @@ function getRentalsByCityAndProvince() {
   return groupedRentals;
 }
 
-
 function getAllRentals() {
   return rentals;
 }

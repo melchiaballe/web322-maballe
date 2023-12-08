@@ -36,6 +36,7 @@ app.use(session({
 app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.ctype = req.session.ctype;
+  res.locals.cart = req.session.cart;
   next();
 })
 

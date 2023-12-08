@@ -1,25 +1,148 @@
 .container {
-    padding: 100px 60px 150px 60px !important;
+  padding: 100px 60px 150px 60px !important;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  color: #41507b;
+}
+
+.header-sub-text {
+  text-align: center;
+}
+
+.header-icon {
+  height: 100px;
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rent-btn {
+  background: #41507b !important;
+  color: #fff !important;
+}
+
+.card{
+  margin: auto;
+  max-width: 1500px;
+  width: 100%;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  border: transparent;
+}
+
+@media(max-width:900px) {
+  .card {
+    margin: 3vh auto;
   }
-  
-  .welcome-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.cart{
+  background-color: #fff;
+  padding: 4vh 5vh;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+@media(max-width:900px) { 
+  .cart{
+    padding: 4vh;
+    border-bottom-left-radius: unset;
+    border-top-right-radius: 1rem;
   }
-  
-  .header-title {
-    color: #41507b;
+}
+
+.summary {
+  background-color: #41507b;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  padding: 4vh;
+  color: #fff;
+}
+
+@media(max-width:900) {
+  .summary {
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1rem;
   }
-  
-  .header-sub-text {
-    text-align: center;
-  }
-  
-  .header-icon {
-    height: 100px;
-    width: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+}
+
+.summary .col-2{
+  padding: 0;
+}
+
+.summary .col-10 {
+  padding: 0;
+}
+
+.row{
+  margin: 0;
+}
+
+.title b{
+  font-size: 1.5rem;
+}
+
+.main{
+  margin: 0;
+  padding: 2vh 0;
+  width: 100%;
+}
+
+.col-2, .col{
+  padding: 0 1vh;
+}
+
+.close {
+  margin-left: auto;
+  font-size: 0.7rem;
+}
+
+hr {
+  margin-top: 1.25rem;
+}
+
+#code {
+  background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+}
+
+.card img {
+  max-width: 300px;
+  max-height: inherit;
+}
+
+button, .order-btn {
+  background: #fff !important;
+  color: #41507b !important;
+}
+
+.mt-6 {
+  margin-top: 6rem;
+}
+
+.form-control {
+  background: transparent !important;
+  border: none;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.toggle-night-btn {
+  height: 36px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}

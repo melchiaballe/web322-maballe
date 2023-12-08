@@ -24,7 +24,6 @@ router.get('', (req, res) => {
             }
             groupedRentals.find(({cityProvince}) => cityProvince == key).rentals.push(rental);
         });
-
         res.render("pages/Rentals/rentals", {
             additionalCSS: "css/Rentals/rentals.css",
             groupedRentals: groupedRentals,

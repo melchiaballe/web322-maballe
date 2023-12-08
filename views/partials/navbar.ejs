@@ -11,7 +11,7 @@
         <li><a class="nav-link" href="/log-in">Log in</a></li>
         <li><a class="nav-link" href="/sign-up">Sign up</a></li>
       <% } else { %>
-        <li><a class="nav-link" href="<%= ctype === 'data-clerk' ? '/rentals/list' : '/cart' %>"> <%= user.firstName %></a></li>
+        <li><a class="nav-link" href="<%= ctype === 'data-clerk' ? '/rentals/list' : '/cart' %>"> <%= ctype === 'data-clerk' ? 'Rentals List' : 'Cart' %></a></li>
         <li><a class="nav-link" href="/logout">Logout</a></li>
       <% } %>
     </ul>

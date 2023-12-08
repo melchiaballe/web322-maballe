@@ -283,15 +283,184 @@ router.get('/logout', (req, res) => {
 });
 
 // Cart page
-router.get('/cart', (req, res) => {
+router.get('/cart', async (req, res) => {
     if(req.session.user && req.session.ctype === 'customer') {
+        let cart = req.session.cart || [];
+        let rentals = [];
+
+        if (req.session.cart) {
+            await rentalModel.find({}).then(data => {
+                filtered_rentals = data.filter(x => cart.some(y => y._id === x.id));
+                filtered_rentals.forEach(x => {
+                    x["numNights"] = cart.find(({ _id }) => _id === x.id).numNights;
+                    x["subTotal"] = cart.find(({ _id }) => _id === x.id).subTotal;
+                    rentals.push(x)
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        } else {
+            cart = [];
+        }
+        
         res.render("pages/Cart/cart", {
-            additionalCSS: "css/Cart/cart.css"
+            additionalCSS: "/css/Cart/cart.css",
+            rentals: rentals,
+            cart: cart,
+            errors: {}
         });
     } else {
         res.status(401).json({'error': 'You are not authorized to view this page'});
     }
 });
 
+// Add rental to Cart
+router.post('/cart/add/:id', async (req, res) => {
+    if(req.session.user && req.session.ctype === 'customer') {
+        const id = req.params.id;
+        let cart = req.session.cart ? req.session.cart : [];
+
+        await rentalModel.findOne({_id: id}).then(data => {
+            cart.push({ 
+                _id: req.params.id,
+                numNights: 1,
+                subTotal: data.pricePerNight
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+        
+        req.session.cart = cart;
+
+        res.redirect("/cart");
+    } else {
+        res.status(401).json({'error': 'You are not authorized to view this page'});
+    }
+});
+
+// Edit rental's number of nights
+router.get('/cart/edit/:id/:action', async (req, res) => {
+    if(req.session.user && req.session.ctype === 'customer') {
+        const { id, action } = req.params;
+        let cart = req.session.cart ? req.session.cart : [];
+
+        await rentalModel.findOne({_id: id}).then(rental => {
+            let cart_rental = cart.find(({ _id }) => _id === id);
+
+            if(action === 'increase') {
+                cart_rental['numNights'] = cart_rental['numNights'] + 1;
+            } else if(action === 'decrease') {
+                cart_rental['numNights'] > 1 ?  cart_rental['numNights'] =  cart_rental['numNights'] - 1 : '';
+            }
+
+            cart_rental['subTotal'] = cart_rental['numNights'] * rental.pricePerNight;
+            req.session.cart = cart;
+
+            res.redirect("/cart");
+        }).catch(err => {
+            console.log(err);
+        });
+    } else {
+        res.status(401).json({'error': 'You are not authorized to view this page'});
+    }
+});
+
+// Remove rental from Cart
+router.get('/cart/remove/:id', (req, res) => {
+    if(req.session.user && req.session.ctype === 'customer') {
+        const id = req.params.id;
+        let cart = req.session.cart ? req.session.cart : [];
+
+        cart = cart.filter(({ _id }) => _id !== id);
+        req.session.cart = cart;
+
+        res.redirect("/cart");
+    } else {
+        res.status(401).json({'error': 'You are not authorized to view this page'});
+    }
+});
+
+// Checkout Cart
+router.post('/cart/checkout', async (req, res) => {
+    if(req.session.user && req.session.ctype === 'customer') {
+        let { subTotal, vatSubTotal, grandTotal } = req.body;
+        let cart = req.session.cart ? req.session.cart : [];
+        let rentals = [];
+
+        await rentalModel.find({}).then(data => {
+            filtered_rentals = data.filter(x => cart.some(y => y._id === x.id));
+            filtered_rentals.forEach(x => {
+                x["numNights"] = cart.find(({ _id }) => _id === x.id).numNights;
+                x["subTotal"] = cart.find(({ _id }) => _id === x.id).subTotal;
+                rentals.push(x)
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+
+        let html_content = `
+            <div>
+                <h2>Greetings!</h2>
+            </div>
+            <div>
+                <span>This is to confirm your booking for:</span>
+            </div>
+        `;
+
+        rentals.forEach(rental => {
+            cart_rental = cart.find(({ _id }) => _id === rental.id);
+            console.log("cart rental", cart_rental);
+            html_content += `
+                <div> 
+                    <h6>${rental.headline}</h6>
+                </div>
+                <div>
+                    <span>${rental.city}, ${rental.province}</span> 
+                </div>
+                <div>
+                    <span>${cart_rental.numNights} ${cart_rental.numNights > 1 ? 'nights: ' : 'night: '} C$ ${cart_rental.subTotal}</span>
+                </div>
+            `;
+        })
+
+        html_content += `
+            <div>
+                <h6>Summary</h6>
+            </div>
+            <div>
+                <span>${(cart.reduce((n, {numNights}) => n + numNights, 0))} ${(cart.reduce((n, {numNights}) => n + numNights, 0)) > 1 ? 'nights:' : 'night:'}</span>
+                <h6>C$ ${subTotal}</h6>
+            </div>
+            <div>
+                <span>VAT (20%): </span>
+                <h6>C$ ${vatSubTotal}</h6>
+            </div>
+            <div>
+                <h6>Total: C$ ${grandTotal}</h6>
+            </div>
+        `;
+
+        sgMail.setApiKey("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")
+        const msg = {
+            to: req.session.user.email,
+            from: 'dev.melchiaballe@gmail.com',
+            subject: 'Homely Havens: Booking confirmation',
+            html: html_content,
+        }
+
+        sgMail.send(msg).then(() => {
+            console.log('Email sent')
+        }).catch((err) => {
+            console.error("Error while sending email (failing silently):", err);
+        });
+
+        cart = [];
+        req.session.cart = cart;
+
+        res.redirect("/rentals");
+    } else {
+        res.status(401).json({'error': 'You are not authorized to view this page'});
+    }
+});
 
 module.exports = router;

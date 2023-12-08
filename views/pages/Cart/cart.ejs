@@ -1,9 +1,169 @@
 <div class="container">
     <div class="welcome-container">
-        <div>
-            <img class="header-icon" src="images/logo.png" class="logo" alt="Homely Havens">
-            <h1 class="header-title">WELCOME TO HOMELY HAVENS</h1>
-            <h3 class="header-sub-text">Cart is still on the works brb</h3>
+        <div class="card">
+            <% if(cart && cart.length > 0) { %>
+                <div class="row">
+                    <div class="col-md-8 cart">
+                        <div class="title mb-2">
+                            <div class="row">
+                                <div class="col">
+                                    <h5>
+                                        <b>Your Cart (<%- cart ? cart.length : '0'    %>)</b>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <% rentals.forEach((rental, index) => { %>
+                            <div class="row border-top mb-2">
+                                <div class="row main align-items-center">
+                                    <div class="col-2">
+                                        <img 
+                                            src="images/<%- rental.imageUrl %>" 
+                                            alt="<%- rental.headline %>"
+                                            style="width:100%"
+                                        >
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-10 text-start">
+                                                <h6><%- rental.headline %></h6>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <a class="btn" href="/cart/remove/<%= rental._id %>">
+                                                    <i class='bx bx-trash'></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <span class="text-muted">
+                                                <i class='bx bx-map align-middle mb-1'></i> <%- rental.city %>, <%- rental.province %>
+                                            </span>
+                                        </div>
+                                        <div class="row border-bottom align-items-center">
+                                            <div class="col mb-2">
+                                                <label class="form-label">Num. of nights</label>
+                                            </div>
+                                            <div class="col mb-2">
+                                                <div class="input-group align-items-center">
+                                                    <div class="input-group-prepend">
+                                                        <a 
+                                                            class="btn btn-outline-secondary toggle-night-btn"
+                                                            href="cart/edit/<%- rental._id %>/decrease"
+                                                            name="decreaseNights-<%- rental._id %>"
+                                                            id="decreaseNights-<%- rental._id %>"
+                                                        >
+                                                            -
+                                                        </a>
+                                                    </div>
+                                                    <input 
+                                                        class="form-control text-center" 
+                                                        type="number" 
+                                                        name="numNights" 
+                                                        min="1"
+                                                        max="100"
+                                                        step="1"
+                                                        value="<%- rental.numNights %>" 
+                                                        placeholder="Number of nights"
+                                                        disabled
+                                                        id="numNights-<%- rental._id %>"
+                                                    >
+                                                    <div class="input-group-append">
+                                                        <a 
+                                                            class="btn btn-outline-secondary toggle-night-btn"
+                                                            href="cart/edit/<%- rental._id %>/increase"
+                                                            type="submit"
+                                                            name="increaseNights-<%- rental._id %>"
+                                                            id="increaseNights-<%- rental._id %>"
+                                                        >
+                                                            +
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row align-items-center mt-1 mb-1">
+                                                    <div class="col text-start">
+                                                        <p class="m-0"><%- rental.numNights %> <%- rental.numNights > 1 ? '  nights' : ' night' %></p>
+                                                    </div>
+                                                    <div class="col text-end">
+                                                        <h6 class="mb-0">
+                                                            C$ <%- rental.subTotal %>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                        <div class="row mt-5">
+                            <a class="text-muted " href="/rentals">
+                                <i class='bx bx-left-arrow-alt align-middle'></i> Back to rentals
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 summary">
+                        <div class="title">
+                            <h5>Summary</h5>
+                        </div>
+                        <hr />
+                        <form 
+                            action="/cart/checkout %>"
+                            method="post"
+                            class="m-0 p-0"
+                        >
+                            <div class="row align-items-center mb-1">
+                                <div class="col text-start">
+                                    <%- (cart.reduce((n, {numNights}) => n + numNights, 0)) %> <%- (cart.reduce((n, {numNights}) => n + numNights, 0)) > 1 ? '  nights' : ' night' %>
+                                </div>
+                                <div class="col text-end">
+                                    C$ <%= (cart.reduce((n, {subTotal}) => n + subTotal, 0)) %>
+                                </div>
+                                <input type="hidden" id="subTotal" name="subTotal" value="<%= (cart.reduce((n, {subTotal}) => n + subTotal, 0)) %>">
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col text-start">
+                                    VAT (20%)
+                                </div>
+                                <div class="col text-end">
+                                    C$ <%- (cart.reduce((n, {subTotal}) => n + subTotal, 0)) * 0.20 %>
+                                </div>
+                                <input type="hidden" id="vatSubTotal" name="vatSubTotal" value="<%- (cart.reduce((n, {subTotal}) => n + subTotal, 0)) * 0.20 %>">
+                            </div>
+                            <hr />
+                            <div class="row align-items-center">
+                                <div class="col text-start">
+                                    <h5>Total</h5>
+                                </div>
+                                <div class="col text-end">
+                                    <h5>
+                                        C$ <%- (cart.reduce((n, {subTotal}) => n + subTotal, 0)) + (cart.reduce((n, {subTotal}) => n + subTotal, 0)) * 0.20 %>
+                                    </h5>
+                                </div>
+                                <input type="hidden" id="grandTotal" name="grandTotal" value="<%- (cart.reduce((n, {subTotal}) => n + subTotal, 0)) + (cart.reduce((n, {subTotal}) => n + subTotal, 0)) * 0.20 %>">
+                            </div>
+                            <div class="row align-items-end mt-6">
+                                <button
+                                    class="btn order-btn"
+                                    type="submit"
+                                >
+                                    <b>Place Order</b>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <% } else {%>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <h3 class="mt-5 mb-4">Cart is empty!</h3>
+                        <h5 class="mb-5"><a class="btn rent-btn" href="/rentals">View Rentals here</a></h5>
+                    </div>
+                </div>
+            <% } %>
         </div>
     </div>
 </div>
