@@ -440,7 +440,7 @@ router.post('/cart/checkout', async (req, res) => {
             </div>
         `;
 
-        sgMail.setApiKey("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")
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
         const msg = {
             to: req.session.user.email,
             from: 'dev.melchiaballe@gmail.com',
