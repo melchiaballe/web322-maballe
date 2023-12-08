@@ -19,6 +19,27 @@ const dotenv = require('dotenv').config({path: "./config/.env"})
 const mongoose = require("mongoose");
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_CONN_STRING,
+  collection: 'mySessions'
+});
+
+store.on('error', function(error) {
+  console.log(error);
+});
+
+app.use(require('express-session')({
+  secret: 'This is a secret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  },
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
+
 
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
